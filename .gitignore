@@ -1,0 +1,10 @@
+# Object files
+*.o
+
+# Excutables
+*.bin
+
+#arquivos VSCode
+*.log
+*.json
+.history/*
