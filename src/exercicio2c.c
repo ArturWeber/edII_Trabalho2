@@ -5,8 +5,7 @@
 #include <string.h>
 #include <time.h>
 
-// Definição das variaveis que controlam a medição de tempo
-clock_t _ini, _fim;
+#include "funcs_time.h"
 
 // Definição do tipo booleano
 typedef unsigned char bool;
@@ -38,16 +37,6 @@ string *ler_strings(const char *arquivo, const int n) {
   fclose(f);
 
   return strings;
-}
-
-void inicia_tempo() {
-  srand(time(NULL));
-  _ini = clock();
-}
-
-double finaliza_tempo() {
-  _fim = clock();
-  return ((double)(_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
 unsigned h_div(unsigned x, unsigned B) { return x % B; }
