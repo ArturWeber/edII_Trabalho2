@@ -1,7 +1,5 @@
 #include "exercicio2a.h"
-
-// Definição das variaveis que controlam a medição de tempo
-clock_t _ini, _fim;
+#include <stdlib.h>
 
 unsigned converter(string s) {
   unsigned h = 0;
@@ -10,29 +8,33 @@ unsigned converter(string s) {
   return h;
 }
 
-string *ler_strings(const char *arquivo, const int n) {
+// Definicao de funcoes para manipulacao do TAD lista
+lista *cria_lista(unsigned tamanho) {
+  lista *nova_lista = (lista *)malloc(sizeof(lista));
+  nova_lista->elemento = (string *)malloc(sizeof(string) * tamanho);
+  nova_lista->tamanho = tamanho;
+  for (int i = 0; i < tamanho; i++) {
+    nova_lista->elemento[i] = (string)malloc(sizeof(char) * MAX_STRING_LEN);
+  }
+  return nova_lista;
+}
+
+void destroi_lista(lista *lista_de_strings) {
+  for (int i = 0; i < lista_de_strings->tamanho; i++) {
+    free(lista_de_strings->elemento[i]);
+  }
+  free(lista_de_strings->elemento);
+  free(lista_de_strings);
+}
+
+void ler_strings(const char *arquivo, lista *lista_strings) {
   FILE *f = fopen(arquivo, "r");
 
-  string *strings = (string *)malloc(sizeof(string) * n);
-
   for (int i = 0; !feof(f); i++) {
-    strings[i] = (string)malloc(sizeof(char) * MAX_STRING_LEN);
-    fscanf(f, "%s\n", strings[i]);
+    fscanf(f, "%s\n", lista_strings->elemento[i]);
   }
 
   fclose(f);
-
-  return strings;
-}
-
-void inicia_tempo() {
-  srand(time(NULL));
-  _ini = clock();
-}
-
-double finaliza_tempo() {
-  _fim = clock();
-  return ((double)(_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
 unsigned h_div(unsigned x, unsigned i, unsigned B) { return ((x % B) + i) % B; }

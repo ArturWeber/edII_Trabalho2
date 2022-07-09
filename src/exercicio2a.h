@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> // funções strcmp e strcpy
-#include <time.h>
+
+#include "funcs_time.h"
 
 // Definição do tipo booleano
 typedef unsigned char bool;
@@ -15,14 +16,21 @@ typedef unsigned char bool;
 typedef char *string;
 #define MAX_STRING_LEN 20
 
-// Headers para tratar do tipo string
+// Definicao do tipo lista
+typedef struct {
+  string *elemento;
+  unsigned tamanho;
+} lista;
+
+// Declaracao de funcoes para manipulacao do TAD lista
+lista *cria_lista(unsigned tamanho);
+void destroi_lista(lista *lista_de_strings);
+
+// Declaracao de funcoes para tratar do tipo string
 unsigned converter(string s);
-string *ler_strings(const char *arquivo, const int n);
 
-// Funcoes para analise de tempo
-void inicia_tempo();
-double finaliza_tempo();
+void ler_strings(const char *arquivo, lista *lista_strings);
 
-// Funcoes hash
+// Declaracao das funcoes hash
 unsigned h_div(unsigned x, unsigned i, unsigned B);
 unsigned h_mul(unsigned x, unsigned i, unsigned B);
