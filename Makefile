@@ -17,7 +17,7 @@ DIR_FILE = files
 # CONFIGURACAO DOS EXERCICIOS
 CODIGOS_FONTES = $(shell find $(DIR_FONTE)/exercicio*.c)
 OBJETOS = $(CODIGOS_FONTES:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
-BINARIOS = $(OBJETOS:$(DIR_OBJ)/%.o=$(DIR_BIN)/%.bin)
+BINARIOS = $(CODIGOS_FONTES:$(DIR_FONTE)/%.c=$(DIR_BIN)/%.bin)
 # FIM DA CONFIGURACAO DOS EXERCICIOS
 
 # CONFIGURACOES DE DEPENDENCIAS DOS EXERCICIOS
@@ -34,12 +34,20 @@ exercicio1d_DEPS = \
 
 
 exercicio2a_DEPS = \
-
+									 src/funcs_exercicio2a.c
 
 exercicio2b_DEPS = \
 
 
 exercicio2c_DEPS = \
+
+OBJETOS += $(exercicio1a_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
+OBJETOS += $(exercicio1b_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
+OBJETOS += $(exercicio1c_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
+OBJETOS += $(exercicio1d_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
+OBJETOS += $(exercicio2a_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
+OBJETOS += $(exercicio2b_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
+OBJETOS += $(exercicio2c_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
 # FIM DA CONFIGURACAO DE DEPENDENCIAS DOS EXERCICIOS
 
 # CONFIGURACOES DO COMPILADOR
@@ -51,7 +59,7 @@ endif
 # FIM DAS CONFIGURACOES DO COMPILADOR
 
 # REGRAS PARA CONSTRUCAO DOS EXERCICIOS
-all	: $(BINARIOS)
+all	: $(OBJETOS) $(BINARIOS)
 
 $(DIR_BIN)/%.bin	:	$(DIR_OBJ)/%.o
 	$(CC) $(C_FLAGS) -o $@ $< $($*_DEPS)
