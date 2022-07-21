@@ -1,9 +1,10 @@
 # Makefile para o segundo projeito de SCC 0224/0606 – Estruturas de Dados II
 # 
 # Alunos:
-#		Carlos Henrique Craveiro Aquino Veras - NUSP 12547187
-# 	Pedro Gudin - NUSP ??
-# 	Arthur Weber - NUSP ?? 
+# 	Artur Brenner Weber - NUSP 12675451
+#	Carlos Henrique Craveiro Aquino Veras - NUSP 12547187
+# 	Pedro Borges Gudin - NUSP ??
+ 
 
 # CONFIGURACOES DO PROJETO
 MODO = RELEASE #(DEBUG/RELEASE)
