@@ -20,7 +20,7 @@ unsigned insere_na_tabela(tabela_hash_t *tabela, lista *insercoes,
   for (int i = 0; i < insercoes->tamanho; i++) {
     unsigned int endereco =
         (*func_hash)(converter(insercoes->elemento[i]), 0, tabela->tamanho);
-    if (tabela->hash[i]->tamanho != 0) { // DE INSERCAO, CONTABILIZE-A
+    if (tabela->hash[endereco]->tamanho != 0) { // DE INSERCAO, CONTABILIZE-A
       colisoes++;
     }
     insere_fim_lista_encadeada(
