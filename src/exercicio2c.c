@@ -1,50 +1,4 @@
-#include <assert.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-#include "funcs_time.h"
-
-// Definição do tipo booleano
-typedef unsigned char bool;
-#define TRUE 1
-#define FALSE 0
-
-// Definição do tipo string
-typedef char *string;
-
-#define MAX_STRING_LEN 20
-
-unsigned converter(string s) {
-  unsigned h = 0;
-  for (int i = 0; s[i] != '\0'; i++)
-    h = h * 256 + s[i];
-  return h;
-}
-
-string *ler_strings(const char *arquivo, const int n) {
-  FILE *f = fopen(arquivo, "r");
-
-  string *strings = (string *)malloc(sizeof(string) * n);
-
-  for (int i = 0; !feof(f); i++) {
-    strings[i] = (string)malloc(sizeof(char) * MAX_STRING_LEN);
-    fscanf(f, "%s\n", strings[i]);
-  }
-
-  fclose(f);
-
-  return strings;
-}
-
-unsigned h_div(unsigned x, unsigned B) { return x % B; }
-
-unsigned h_mul(unsigned x, unsigned B) {
-  const double A = 0.6180;
-  return fmod(x * A, 1) * B;
-}
+#include "exercicio2.h"
 
 int main(int argc, char const *argv[]) {
   const int N = 50000;
@@ -57,8 +11,11 @@ int main(int argc, char const *argv[]) {
   unsigned encontrados_h_div = 0;
   unsigned encontrados_h_mul = 0;
 
-  string *insercoes = ler_strings("files/strings_entrada.txt", N);
-  string *consultas = ler_strings("files/strings_busca.txt", M);
+  lista *insercoes = cria_lista(N);
+  lista *consultas = cria_lista(M);
+
+  ler_strings("files/strings_entrada.txt", insercoes);
+  ler_strings("files/strings_busca.txt", consultas);
 
   // cria tabela hash com hash por divisão
 

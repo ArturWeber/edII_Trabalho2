@@ -34,3 +34,4 @@ void ler_strings(const char *arquivo, lista *lista_strings);
 // Declaracao das funcoes hash
 unsigned h_div(unsigned x, unsigned i, unsigned B);
 unsigned h_mul(unsigned x, unsigned i, unsigned B);
+unsigned h_dup(unsigned x, unsigned i, unsigned B);

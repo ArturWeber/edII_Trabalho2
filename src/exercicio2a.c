@@ -1,5 +1,5 @@
-#include "exercicio2a.h"
-#include "tabelaHash2a.h"
+#include "exercicio2.h"
+#include "tabelaHash2ab.h"
 
 int main(int argc, char const *argv[]) {
   unsigned N = 50000;
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[]) {
 
   // Libera memoria alocada para tabela
   destroi_tabela(tabela);
-  // destroi_tabela(tabela2);
+
   //   Libera memoria alocada para as listas de insercao e consulta
   destroi_lista(insercoes);
   destroi_lista(consultas);

@@ -1,5 +1,4 @@
-#include "exercicio2a.h"
-#include <stdlib.h>
+#include "exercicio2.h"
 
 unsigned converter(string s) {
   unsigned h = 0;
@@ -42,4 +41,8 @@ unsigned h_div(unsigned x, unsigned i, unsigned B) { return ((x % B) + i) % B; }
 unsigned h_mul(unsigned x, unsigned i, unsigned B) {
   const double A = 0.6180;
   return ((int)((fmod(x * A, 1) * B) + i)) % B;
+}
+
+unsigned h_dup(unsigned x, unsigned i, unsigned B) {
+  return ((int)(h_mul(x, 0, B) + i * h_div(x, 0, B))) % B;
 }

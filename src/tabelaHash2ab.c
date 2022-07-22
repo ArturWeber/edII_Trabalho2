@@ -1,6 +1,4 @@
-#include "tabelaHash2a.h"
-#include "exercicio2a.h"
-#include <stdlib.h>
+#include "tabelaHash2ab.h"
 
 tabela_hash *cria_tabela(unsigned tamanho_tabela) {
   tabela_hash *tabela = (tabela_hash *)malloc(sizeof(tabela_hash));

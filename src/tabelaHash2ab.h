@@ -1,5 +1,6 @@
 #pragma once
-#include "exercicio2a.h"
+#include "exercicio2.h"
+#include <stdlib.h>
 
 // Definicao do tipo tabela_hash
 typedef struct {
