@@ -1,4 +1,6 @@
 #include "exercicio2.h"
+#include "listaEncadeada.h"
+#include "tabelaHash2c.h"
 
 int main(int argc, char const *argv[]) {
   const int N = 50000;
@@ -18,40 +20,35 @@ int main(int argc, char const *argv[]) {
   ler_strings("files/strings_busca.txt", consultas);
 
   // cria tabela hash com hash por divisão
+  tabela_hash_t *tabela = cria_tabela(B);
 
   // inserção dos dados na tabela hash com hash por divisão
   inicia_tempo();
-  for (int i = 0; i < N; i++) {
-    // inserir insercoes[i] na tabela hash
-  }
+  colisoes_h_div = insere_na_tabela(tabela, insercoes, &h_div);
   double tempo_insercao_h_div = finaliza_tempo();
 
   // busca dos dados na tabela hash com hash por divisão
   inicia_tempo();
-  for (int i = 0; i < M; i++) {
-    // buscar consultas[i] na tabela hash
-  }
+  encontrados_h_div = consulta_na_tabela(tabela, consultas, &h_div);
   double tempo_busca_h_div = finaliza_tempo();
 
-  // destroi tabela hash com hash por divisão
-
-  // cria tabela hash com hash por multiplicação
+  // limpa tabela com hash por multiplicacao
+  limpa_tabela(tabela);
 
   // inserção dos dados na tabela hash com hash por multiplicação
   inicia_tempo();
-  for (int i = 0; i < N; i++) {
-    // inserir insercoes[i] na tabela hash
-  }
+  colisoes_h_mul = insere_na_tabela(tabela, insercoes, &h_mul);
   double tempo_insercao_h_mul = finaliza_tempo();
 
   // busca dos dados na tabela hash com hash por multiplicação
   inicia_tempo();
-  for (int i = 0; i < M; i++) {
-    // buscar consultas[i] na tabela hash
-  }
+  encontrados_h_mul = consulta_na_tabela(tabela, consultas, &h_mul);
   double tempo_busca_h_mul = finaliza_tempo();
 
   // destroi tabela hash com hash por multiplicação
+  destroi_tabela(tabela);
+  destroi_lista(insercoes);
+  destroi_lista(consultas);
 
   printf("Hash por Divisão\n");
   printf("Colisões na inserção: %d\n", colisoes_h_div);

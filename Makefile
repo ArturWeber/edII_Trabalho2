@@ -46,8 +46,9 @@ exercicio2b_DEPS = \
 
 exercicio2c_DEPS = \
 										src/funcs_exercicio2.c \
-									 	src/funcs_time.c
-#										src/tabelaHash2c.c 
+									 	src/funcs_time.c \
+										src/listaEncadeada.c \
+										src/tabelaHash2c.c 
 
 OBJETOS += $(exercicio1a_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
 OBJETOS += $(exercicio1b_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
