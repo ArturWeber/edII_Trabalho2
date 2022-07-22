@@ -2,7 +2,7 @@
 # 
 # Alunos:
 # 	Artur Brenner Weber - NUSP 12675451
-#	Carlos Henrique Craveiro Aquino Veras - NUSP 12547187
+#		Carlos Henrique Craveiro Aquino Veras - NUSP 12547187
 # 	Pedro Borges Gudin - NUSP ??
  
 
@@ -35,12 +35,21 @@ exercicio1d_DEPS = \
 
 
 exercicio2a_DEPS = \
-									 src/funcs_exercicio2a.c
+										src/funcs_exercicio2.c \
+										src/tabelaHash2ab.c \
+										src/funcs_time.c
 
 exercicio2b_DEPS = \
+										src/funcs_exercicio2.c \
+										src/tabelaHash2ab.c \
+									 	src/funcs_time.c 
 
 
 exercicio2c_DEPS = \
+										src/funcs_exercicio2.c \
+									 	src/funcs_time.c \
+										src/listaEncadeada.c \
+										src/tabelaHash2c.c 
 
 OBJETOS += $(exercicio1a_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
 OBJETOS += $(exercicio1b_DEPS:$(DIR_FONTE)/%.c=$(DIR_OBJ)/%.o)
