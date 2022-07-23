@@ -8,3 +8,6 @@
 *.log
 *.json
 .history/*
+
+#zips
+*zip

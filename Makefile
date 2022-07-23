@@ -11,7 +11,7 @@ MODO = RELEASE #(DEBUG/RELEASE)
 DIR_FONTE = src
 DIR_BIN = bin
 DIR_FILE = files
-
+DIR_NUSPS =12675451-12547187-12547997 
 # FIM DAS CONFIGURACOES DO PROJETO
 
 # CONFIGURACAO DOS EXERCICIOS
@@ -41,3 +41,10 @@ run	:
 
 clean	:
 	rm -rf $(BINARIOS)
+
+zip :
+	make clean
+	mkdir $(DIR_NUSPS) 
+	cp --target-directory=$(DIR_NUSPS) -r $(DIR_FONTE) $(DIR_FILE) Makefile $(DIR_BIN)
+	zip -r $(DIR_NUSPS).zip $(DIR_NUSPS)
+	rm -rf $(DIR_NUSPS)
