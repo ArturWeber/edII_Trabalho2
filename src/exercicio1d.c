@@ -3,23 +3,6 @@
 #include <time.h>
 #include <math.h>
 
-//PARA TESTE E DEBUGGING
-void imprime_vetor(int* vetor, int primeiros){
-  for (int i = 0; i < primeiros; i++){
-    printf("%d\n", vetor[i]);
-  }
-}
-void verifica_erro_vetor(int *consultas, int tamanho) {
-  for (int i = 1; i < tamanho; i++){
-    if (consultas[i] < consultas[i - 1]){
-      printf("esse array aqui ta cagado seu idiota\n");
-      return;
-    }
-  }
-  printf("q bom q finalmente fez uma coisa util da tua vida! panaca\n");
-}
-
-
 // Definição das variaveis que controlam a medição de tempo
 clock_t _ini, _fim;
 
