@@ -1,4 +1,4 @@
-// Exercicio1c para o segundo projeito de SCC 0224/0606 – Estruturas de Dados II 
+// Exercicio1c para o segundo projeito de SCC 0224/0606 – Estruturas de Dados II
 // Alunos:
 // 	Artur Brenner Weber - NUSP 12675451
 //	Carlos Henrique Craveiro Aquino Veras - NUSP 12547187
@@ -23,7 +23,7 @@ int *ler_inteiros(const char *arquivo, const int n) {
   for (int i = 0; !feof(f); i++) {
     fscanf(f, "%d\n", &inteiros[i]);
   }
-  
+
   fclose(f);
 
   return inteiros;
@@ -39,8 +39,8 @@ double finaliza_tempo() {
   return ((double)(_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
-//funcao transposicao
-void transposicao(int index, int *consultas){
+// funcao transposicao
+void transposicao(int index, int *consultas) {
   if (index == 0) {
     return;
   }
@@ -49,11 +49,14 @@ void transposicao(int index, int *consultas){
   consultas[index - 1] = aux;
 }
 
-//busca sequencial com transposicao
-void busca_sequencial_simples_transposicao(int *entradas, int *consultas, int tamanhoEntrada, int tamanhoConsulta, unsigned *encontrados) {
+// busca sequencial com transposicao
+void busca_sequencial_simples_transposicao(int *entradas, int *consultas,
+                                           int tamanhoEntrada,
+                                           int tamanhoConsulta,
+                                           unsigned *encontrados) {
   for (int i = 0; i < tamanhoEntrada; i++) {
     for (int j = 0; j < tamanhoConsulta; j++) {
-      if (entradas[i] == consultas[j]){
+      if (entradas[i] == consultas[j]) {
         (*encontrados)++;
         transposicao(j, consultas);
       }
@@ -63,22 +66,22 @@ void busca_sequencial_simples_transposicao(int *entradas, int *consultas, int ta
 
 int main(int argc, char const *argv[]) {
   const int N = 50000;
-  unsigned *encontrados;
-  *encontrados = 0;
+  unsigned encontrados = 0;
 
   int *entradas = ler_inteiros("files/inteiros_entrada.txt", N);
   int *consultas = ler_inteiros("files/inteiros_busca.txt", N);
 
   // realiza busca sequencial
   inicia_tempo();
-  busca_sequencial_simples_transposicao(entradas, consultas, N, N, encontrados);
+  busca_sequencial_simples_transposicao(entradas, consultas, N, N,
+                                        &encontrados);
   double tempo_busca = finaliza_tempo();
 
   printf("Tempo de busca    :\t%fs\n", tempo_busca);
-  printf("Itens encontrados :\t%d\n", *encontrados);
+  printf("Itens encontrados :\t%d\n", encontrados);
 
   free(entradas);
   free(consultas);
-  
+
   return 0;
 }
