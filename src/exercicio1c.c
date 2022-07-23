@@ -40,8 +40,9 @@ double finaliza_tempo() {
   return ((double)(_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
-// funcao transposicao
+// move o registro na posicao index do vetor consultas posicao anterior
 void transposicao(int index, int *consultas) {
+  //verifica se ja esta na menor posicao possivel
   if (index == 0) {
     return;
   }
@@ -59,6 +60,7 @@ void busca_sequencial_simples_transposicao(int *entradas, int *consultas,
     for (int j = 0; j < tamanhoConsulta; j++) {
       if (entradas[i] == consultas[j]) {
         (*encontrados)++;
+        //chama transposicao se registro for encontrado
         transposicao(j, consultas);
       }
     }

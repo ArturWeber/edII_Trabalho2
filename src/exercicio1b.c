@@ -40,7 +40,7 @@ double finaliza_tempo() {
   return ((double)(_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
-// move para frente
+// move o registro na posicao index do vetor consultas para a primeira posicao
 void mover_para_frente(int index, int *consultas) {
   int aux = consultas[index];
   for (int i = index; i > 0; i--) {
@@ -58,6 +58,7 @@ void busca_sequencial_simples_moverfrente(int *entradas, int *consultas,
     for (int j = 0; j < tamanhoConsulta; j++) {
       if (entradas[i] == consultas[j]) {
         (*encontrados)++;
+        //chama mover para frente se registro for encontrado
         mover_para_frente(j, consultas);
       }
     }

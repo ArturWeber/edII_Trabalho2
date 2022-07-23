@@ -43,6 +43,7 @@ double finaliza_tempo() {
 // busca sequencial simples
 void busca_sequencial_simples(int *entradas, int *consultas, int tamanhoEntrada,
                               int tamanhoConsulta, unsigned *encontrados) {
+  //"for" duplo para percorrer os dois vetores completamente comparando                              
   for (int i = 0; i < tamanhoEntrada; i++) {
     for (int j = 0; j < tamanhoConsulta; j++) {
       if (entradas[i] == consultas[j]) {

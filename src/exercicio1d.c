@@ -47,6 +47,7 @@ void trocar(int *consultas, int i, int j) {
   consultas[j] = aux;
 }
 
+//algoritmo quick-sort de ordenacao 
 void quick_sort(int *consultas, int inicio, int fim) {
   if (inicio >= fim) {
     return;
@@ -75,24 +76,35 @@ void quick_sort(int *consultas, int inicio, int fim) {
   quick_sort(consultas, i, fim);
 }
 
+//cria tabela de indice primario
 int *cria_tabela_indice(int *consultas, int N, int index_size) {
+  //usa ceil para quando index_size e numero nao multiplo de N
   int t = ceil((float)N / index_size);
   int *tabela = (int *)malloc(sizeof(int) * t);
+  //atribui valores para a tabela de indice com base na tabela principal
   for (int i = 0; i < t; i++) {
     tabela[i] = consultas[index_size * i];
   }
   return tabela;
 }
 
+//funcao de busca
 void busca_sequencial_tabelaindex(int *entradas, int *tabela, int *consultas,
                                   int tamanhoEntrada, int index_size,
                                   int tamanhoConsulta, unsigned *encontrados) {
+  int tabelaIndice = ceil((float)tamanhoConsulta / index_size);
   for (int i = 0; i < tamanhoEntrada; i++) {
     int j = 0;
+    //primeiro procura na tabela de indice primario
     while (entradas[i] > tabela[j + 1] &&
-           (j + 1) < ceil((float)tamanhoConsulta / index_size)) {
+           (j + 1) < tabelaIndice) {
       j++;
     }
+    //se nao encontrou na tabela de indice primario vai para proximo for
+    if (j == tabelaIndice){
+      break;
+    } 
+    //busca na tabela principal
     j *= index_size;
     while (entradas[i] >= consultas[j] && (j + 1) < tamanhoConsulta) {
       if (entradas[i] == consultas[j]) {
@@ -117,7 +129,7 @@ int main(int argc, char const *argv[]) {
   // criar tabela de indice
   int *tabela = cria_tabela_indice(consultas, N, index_size);
 
-  // realizar consultas na tabela de indices
+  // realizar busca
   inicia_tempo();
   busca_sequencial_tabelaindex(entradas, tabela, consultas, N, index_size, N,
                                &encontrados);
