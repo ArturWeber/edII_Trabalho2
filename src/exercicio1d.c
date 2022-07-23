@@ -101,11 +101,11 @@ int *cria_tabela_indice(int *consultas, int N, int index_size) {
 void busca_sequencial_tabelaindex(int *entradas, int *tabela, int *consultas, int tamanhoEntrada, int index_size, int tamanhoConsulta, unsigned *encontrados) {
   for(int i = 0; i < tamanhoEntrada; i++) {
     int j = 0; 
-    while (entradas[i] < tabela[j]) {
+    while (entradas[i] > tabela[j] && j < ceil((float) tamanhoConsulta / index_size)) {
       j++;
     }
     j *= index_size;
-    while (entradas[i] < consultas[j]) {
+    while (entradas[i] > consultas[j] && j < tamanhoConsulta) {
       if (entradas[i] == consultas[j]) {
         (*encontrados)++;
       }
