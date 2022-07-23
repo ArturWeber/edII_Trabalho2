@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 //PARA TESTE E DEBUGGING
 void imprime_vetor(int* vetor, int primeiros){
@@ -57,63 +58,87 @@ void trocar(int *consultas, int i, int j) {
   consultas[j] = aux;
 }
 
-int particao(int *consultas, int inicio, int fim) {
+void quick_sort(int *consultas, int inicio, int fim) {
+  if (inicio >= fim) {
+    return;
+  }
+
   int i = inicio;
   int j = fim;
   int p = (inicio + fim)/2;
   int pivot = consultas[p];
-  while (i < j){
+
+  while (i <= j){
     while (pivot > consultas[i]) {
       i++;
     }
     while (pivot < consultas[j]) {
       j--;
     }
-    if (i < j) {
+    if (i <= j) {
       trocar(consultas, i, j);
+      i++;
+      j--;
     }
   }
-  return j;
+
+  quick_sort(consultas, inicio, j);
+  quick_sort(consultas, i, fim);
 }
 
-void quick_sort(int *consultas, int inicio, int fim) {
-  if (inicio >= fim) {
-    return;
+int *cria_tabela_indice(int *consultas, int N, int index_size) {
+  int t = ceil((float) N / index_size);
+
+  int *tabela = (int *)malloc(sizeof(int) * t);
+
+  for (int i = 0; i < t; i++) {
+    tabela[i] = consultas[index_size * i];   
   }
-  int p = particao(consultas, inicio, fim); 
-  quick_sort(consultas, inicio, p - 1);
-  quick_sort(consultas, p + 1, fim);
+
+  return tabela;
+}
+
+void busca_sequencial_tabelaindex(int *entradas, int *tabela, int *consultas, int tamanhoEntrada, int index_size, int tamanhoConsulta, unsigned *encontrados) {
+  for(int i = 0; i < tamanhoEntrada; i++) {
+    int j = 0; 
+    while (entradas[i] < tabela[j]) {
+      j++;
+    }
+    j *= index_size;
+    while (entradas[i] < consultas[j]) {
+      if (entradas[i] == consultas[j]) {
+        (*encontrados)++;
+      }
+      j++;
+    }
+  }
 }
 
 int main(int argc, char const *argv[]) {
   const int N = 50000;
   const int index_size = 10000;
-  unsigned encontrados = 0;
+  unsigned *encontrados = 0;
+  *encontrados = 0;
 
   int *entradas = ler_inteiros("files/inteiros_entrada.txt", N);
   int *consultas = ler_inteiros("files/inteiros_busca.txt", N);
 
-  int *exemplo = ler_inteiros("files/inteiros_exemplo.txt", 11);
-
   // ordenar entrada
-  verifica_erro_vetor(exemplo, 11);
-  quick_sort(exemplo, 0, 10);
-  verifica_erro_vetor(exemplo, 11);
+  quick_sort(consultas, 0, N - 1);
 
   // criar tabela de indice
-
+  int *tabela = cria_tabela_indice(consultas, N, index_size);
 
   // realizar consultas na tabela de indices
   inicia_tempo();
-  for (int i = 0; i < N; i++) {
-    // buscar o elemento consultas[i] na entrada
-  }
+  busca_sequencial_tabelaindex(entradas, tabela, consultas, N, index_size, N, encontrados);
   double tempo_busca = finaliza_tempo();
 
   printf("Tempo de busca    :\t%fs\n", tempo_busca);
-  printf("Itens encontrados :\t%d\n", encontrados);
+  printf("Itens encontrados :\t%d\n", *encontrados);
 
   free(entradas);
+  free(tabela);
   free(consultas);
 
   return 0;
