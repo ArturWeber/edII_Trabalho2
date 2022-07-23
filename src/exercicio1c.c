@@ -36,6 +36,9 @@ double finaliza_tempo() {
 
 //funcao transposicao
 void transposicao(int index, int *consultas){
+  if (index == 0) {
+    return;
+  }
   int aux = consultas[index];
   consultas[index] = consultas[index - 1];
   consultas[index - 1] = aux;
