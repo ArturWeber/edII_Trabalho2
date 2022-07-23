@@ -88,24 +88,21 @@ void quick_sort(int *consultas, int inicio, int fim) {
 
 int *cria_tabela_indice(int *consultas, int N, int index_size) {
   int t = ceil((float) N / index_size);
-
   int *tabela = (int *)malloc(sizeof(int) * t);
-
   for (int i = 0; i < t; i++) {
     tabela[i] = consultas[index_size * i];   
   }
-
   return tabela;
 }
 
 void busca_sequencial_tabelaindex(int *entradas, int *tabela, int *consultas, int tamanhoEntrada, int index_size, int tamanhoConsulta, unsigned *encontrados) {
   for(int i = 0; i < tamanhoEntrada; i++) {
     int j = 0; 
-    while (entradas[i] > tabela[j] && j < ceil((float) tamanhoConsulta / index_size)) {
+    while (entradas[i] > tabela[j + 1] && (j + 1) < ceil((float) tamanhoConsulta / index_size)) {
       j++;
     }
     j *= index_size;
-    while (entradas[i] > consultas[j] && j < tamanhoConsulta) {
+    while (entradas[i] >= consultas[j] && (j + 1) < tamanhoConsulta) {
       if (entradas[i] == consultas[j]) {
         (*encontrados)++;
       }
@@ -117,7 +114,7 @@ void busca_sequencial_tabelaindex(int *entradas, int *tabela, int *consultas, in
 int main(int argc, char const *argv[]) {
   const int N = 50000;
   const int index_size = 10000;
-  unsigned *encontrados = 0;
+  unsigned *encontrados;
   *encontrados = 0;
 
   int *entradas = ler_inteiros("files/inteiros_entrada.txt", N);
