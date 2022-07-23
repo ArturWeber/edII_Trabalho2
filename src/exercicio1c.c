@@ -34,22 +34,46 @@ double finaliza_tempo() {
   return ((double)(_fim - _ini)) / CLOCKS_PER_SEC;
 }
 
+//funcao transposicao
+void transposicao(int index, int *consultas){
+  if (index == 0) {
+    return;
+  }
+  int aux = consultas[index];
+  consultas[index] = consultas[index - 1];
+  consultas[index - 1] = aux;
+}
+
+//busca sequencial com transposicao
+void busca_sequencial_simples_transposicao(int *entradas, int *consultas, int tamanhoEntrada, int tamanhoConsulta, unsigned *encontrados) {
+  for (int i = 0; i < tamanhoEntrada; i++) {
+    for (int j = 0; j < tamanhoConsulta; j++) {
+      if (entradas[i] == consultas[j]){
+        (*encontrados)++;
+        transposicao(j, consultas);
+      }
+    }
+  }
+}
+
 int main(int argc, char const *argv[]) {
   const int N = 50000;
-  unsigned encontrados = 0;
+  unsigned *encontrados;
+  *encontrados = 0;
 
   int *entradas = ler_inteiros("files/inteiros_entrada.txt", N);
   int *consultas = ler_inteiros("files/inteiros_busca.txt", N);
 
-  // realiza busca sequencia com realocação
+  // realiza busca sequencial
   inicia_tempo();
-  for (int i = 0; i < N; i++) {
-    // buscar o elemento consultas[i] na entrada
-  }
+  busca_sequencial_simples_transposicao(entradas, consultas, N, N, encontrados);
   double tempo_busca = finaliza_tempo();
 
   printf("Tempo de busca    :\t%fs\n", tempo_busca);
-  printf("Itens encontrados :\t%d\n", encontrados);
+  printf("Itens encontrados :\t%d\n", *encontrados);
 
+  free(entradas);
+  free(consultas);
+  
   return 0;
 }
