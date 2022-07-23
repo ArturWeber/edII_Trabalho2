@@ -15,9 +15,10 @@ int *ler_inteiros(const char *arquivo, const int n) {
 
   int *inteiros = (int *)malloc(sizeof(int) * n);
 
-  for (int i = 0; !feof(f); i++)
+  for (int i = 0; !feof(f); i++) {
     fscanf(f, "%d\n", &inteiros[i]);
-
+  }
+  
   fclose(f);
 
   return inteiros;
